@@ -1,4 +1,4 @@
-Protein_ID;Gene Name;log2_FC;p_val;EV_vs_shTRPV1_p.adj;significant;EV_vs_shTRPV1_significant;imputed;num_NAs
+Protein_ID;Gene Name;log2_FC;p_val;p_adj;significant;EV_vs_shTRPV1_significant;imputed;num_NAs
 A0FGR8;ESYT2;-1.19;5.01E-17;7.77E-15;TRUE;TRUE;FALSE;0
 A6NCE7;MAP1LC3B2;-2.81;3.79E-11;7.63E-10;TRUE;TRUE;FALSE;0
 A6NDU8;RIMOC1;1.42;1.20E-05;5.46E-05;TRUE;TRUE;TRUE;2
