@@ -9,12 +9,12 @@ experiment_annotation <- read.csv("Experiment_annotation_R_EVvsshTRPV1.csv", sep
 
 # Filtering and processing relevant data
 data_volcano <- report.pg_matrix %>%
-  select(Protein_ID, log2_FC, p_val) %>%
-  filter(!is.na(log2_FC) & !is.na(p_val)) %>% # Remove NA
+  select(Protein_ID, log2_FC, p_adj) %>%
+  filter(!is.na(log2_FC) & !is.na(p_adj)) %>% # Remove NA
   mutate(
-    log_p_value = -log10(p_val),
+    log_p_value = -log10(p_adj),
     significance = case_when(
-      p_val < 0.05 & abs(log2_FC) >= 1.2 ~ "Significant",
+      p_adj < 0.05 & abs(log2_FC) >= 1 ~ "Significant",
       TRUE ~ "Not significant")
   )
 
@@ -32,7 +32,7 @@ ggplot(data_volcano, aes(x = log2_FC, y = log_p_value)) +
   scale_color_manual(values = c("Significant" = "black", "Not significant" = "grey", "Marked" = "red")) +
   
   # Cutting lines
-  geom_vline(xintercept = c(-1.2, 1.2), linetype = "dashed", color = "black") +  
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +  
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +  
   
   # Featured protein labels
