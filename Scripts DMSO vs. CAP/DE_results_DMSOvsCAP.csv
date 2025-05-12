@@ -1,4 +1,4 @@
-Protein_ID;Gene Name;log2_FC;p_val;EV_vs_EV_CAP_p.adj;significant;EV_vs_EV_CAP_significant;imputed;num_NAs
+Protein_ID;Gene Name;log2_FC;p_val;p_adj;significant;EV_vs_EV_CAP_significant;imputed;num_NAs
 O00458;IFRD1;-1.07;8.24E-09;1.32E-06;TRUE;TRUE;FALSE;0
 O00622;CCN1;1.34;0.00403;0.0409;TRUE;TRUE;FALSE;0
 O00762;UBE2C;1.51;1.82E-05;0.000771;TRUE;TRUE;TRUE;1
