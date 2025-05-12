@@ -4,13 +4,13 @@ library(dplyr)
 library(ggrepel)
 
 # Upload data
-report.pg_matrix <- read.csv("DE_results.csv", sep = ";", header = TRUE, dec = ".", check.names = FALSE)
-experiment_annotation <- read.csv("Experiment_annotation_R_EVvsshTRPV1.csv", sep = ";", header = TRUE, dec = ".", check.names = FALSE)
+report.pg_matrix <- read.csv("DE_results_DMSOvsCAP.csv", sep = ";", header = TRUE, dec = ".", check.names = FALSE)
+experiment_annotation <- read.csv("Experiment_annotation_R_DMSOvsCAP.csv", sep = ";", header = TRUE, dec = ".", check.names = FALSE)
 
 # Filtering and processing relevant data
 data_volcano <- report.pg_matrix %>%
   select(Protein_ID, log2_FC, p_adj) %>%
-  filter(!is.na(log2_FC) & !is.na(p_adj)) %>% # Delete NA
+  filter(!is.na(log2_FC) & !is.na(p_adj)) %>% # Remove NA
   mutate(
     log_p_value = -log10(p_adj),
     significance = ifelse(p_adj < 0.05 & abs(log2_FC) > 1, "Significant", "Not significant")
@@ -26,27 +26,27 @@ ggplot(data_volcano, aes(x = log2_FC, y = log_p_value)) +
   # Define custom colours
   scale_color_manual(values = c("Significant" = "black", "Not significant" = "grey")) +
   
-  # Líneas de corte
+  # Cutting lines
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "black") +  
   geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +  
   
-  # Añadir etiquetas para las proteínas más significativas
+  # Add labels for the most significant proteins
   geom_label_repel(
     data = subset(data_volcano, p_adj < 0.05 & abs(log2_FC) > 1.2),  # Significant protein only
     aes(label = Protein_ID),
     size = 5, 
     fill = "white",        # White background
-    color = "black",       # Black text
+    color = "black",       # Black text 
     label.size = 0.5,      # Rectangle border thickness
     box.padding = 0.5,     # Spacing around text
-    max.overlaps = 15      # Avoid excessive overlaps
+    max.overlaps = 10      # Avoid excessive overlaps
   ) +
   
-  # Customisation of the chart
+  # Customisation of the graphic
   labs(title = "Volcano Plot - Differentially expressed proteins",
        x = "Log2 Fold Change", y = "-Log10(p-value)") +
   
-  theme_minimal() +   # Apply theme minimal
+  theme_minimal() +   # Apply theme_minimal
   theme(
     legend.position = "top",
     axis.title.x = element_text(size = 14),  # X-axis title size
@@ -56,3 +56,4 @@ ggplot(data_volcano, aes(x = log2_FC, y = log_p_value)) +
   )
 
 dev.off()
+
