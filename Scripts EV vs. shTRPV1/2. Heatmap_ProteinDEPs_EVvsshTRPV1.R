@@ -24,7 +24,7 @@ diff_expr <- read.csv("report.pg_matrix_filtering.csv",
                       stringsAsFactors = FALSE)
 
 report_pg_filtered <- diff_expr %>% 
-  filter(abs(log2_FC) > 1)
+  filter(abs(log2_FC) > 1.2)
 
 # -----------------------------
 # 3. Review and prepare identifiers
