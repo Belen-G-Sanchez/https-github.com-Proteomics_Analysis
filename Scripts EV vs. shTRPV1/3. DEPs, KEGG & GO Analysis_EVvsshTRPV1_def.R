@@ -9,7 +9,7 @@ report.pg_matrix <- read.csv ("DE_results.csv",
                               check.names = FALSE) 
 # Filtering differentially expressed proteins
 filtered_report.pg <- report.pg_matrix %>%
-  filter(abs(log2_FC) > 1 & p_val < 0.05)
+  filter(abs(log2_FC) > 1 & p_adj < 0.05)
 # Save the filtered file as a new CSV file
 write.csv(filtered_report.pg, "report.pg_matrix_filtering.csv", row.names = FALSE)
 
