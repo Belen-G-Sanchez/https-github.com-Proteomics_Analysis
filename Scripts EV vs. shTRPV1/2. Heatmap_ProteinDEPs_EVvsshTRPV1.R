@@ -18,13 +18,13 @@ intensities <- read.csv("report.pg_matrix_R_EVvsshTRPV1_ProteinGroup.csv",
 
 # Load the differentially expressed proteins file
 # It is assumed that this file contains at least the column "Protein_ID"
-diff_expr <- read.csv("report.pg_matrix_filtrado.csv", 
+diff_expr <- read.csv("report.pg_matrix_filtering.csv", 
                       sep = ";", 
                       header = TRUE, 
                       stringsAsFactors = FALSE)
 
 report_pg_filtered <- diff_expr %>% 
-  filter(abs(log2_FC) > 1.2)
+  filter(abs(log2_FC) > 1)
 
 # -----------------------------
 # 3. Review and prepare identifiers
